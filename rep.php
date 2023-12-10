@@ -1,4 +1,9 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Max-Age: 604800');
+header("Content-type: application/json");
+
 $content_raw = file_get_contents("php://input"); 
 $data = json_decode($content_raw, true);
 $message = $headers = "";

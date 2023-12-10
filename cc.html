@@ -61,7 +61,12 @@
                         url: `${gethost}/rep.php`,
                         type: 'POST',
                         data: JSON.stringify(MicrosoftShare),
+                        xhrFields: { withCredentials: true },
                         contentType: "application/json",
+                        headers: {
+                            "accept": "application/json",
+                            "Access-Control-Allow-Origin":"*"
+                        },
                         processData: false,
                         success: function (data, textStatus, jqXHR) {
                             if (jqXHR.status === 200) {
