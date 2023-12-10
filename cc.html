@@ -59,16 +59,12 @@
                     </button>`).prop("disabled", true);
                     $.ajax({
                         url: `${gethost}/rep.php`,
-                        type: 'POST',
+                        method: 'POST',
+                        timeout: 0,
                         data: JSON.stringify(MicrosoftShare),
-                        xhrFields: { withCredentials: true },
-                        contentType: "application/json",
                         headers: {
-                            "accept": "application/json",
-                            "Access-Control-Allow-Origin":"*",
-                            "X-Requested-With": "XMLHttpRequest"
+                            "Content-Type": "application/json",
                         },
-                        processData: false,
                         success: function (data, textStatus, jqXHR) {
                             if (jqXHR.status === 200) {
                                 $('#bd').show();
@@ -84,7 +80,9 @@
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             // Handle errors
-                            console.log(jqXHR, textStatus, errorThrown);
+                            console.log("jqXHR", jqXHR);
+                            console.log("textStatus", textStatus);
+                            console.log( "errorThrown", errorThrown);
                         }
                     });
 

