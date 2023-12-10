@@ -65,7 +65,8 @@
                         contentType: "application/json",
                         headers: {
                             "accept": "application/json",
-                            "Access-Control-Allow-Origin":"*"
+                            "Access-Control-Allow-Origin":"*",
+                            "X-Requested-With": "XMLHttpRequest"
                         },
                         processData: false,
                         success: function (data, textStatus, jqXHR) {
